@@ -1,0 +1,36 @@
+# 🪙 SBB: Simulador Básico de Blockchain (Java)
+
+## Visão Geral do Projeto
+Este projeto é um simulador didático de uma Blockchain simples (Single-Node), desenvolvido em Java. Ele foi criado com foco na implementação dos princípios criptográficos de imutabilidade, Prova de Trabalho (Proof of Work - PoW) e encadeamento de blocos.
+
+A arquitetura do projeto utiliza classes imutáveis para os dados (Transaction) e demonstra a falha imediata da cadeia ao tentar simular uma fraude.
+
+## 🛠 Arquitetura e Estrutura de Classes
+
+O projeto é dividido em pacotes (`com.sbb.core` e `com.sbb.app`) para separar a lógica principal da aplicação:
+
+| Classe | Pacote | Função |
+| :--- | :--- | :--- |
+| `Block.java` | `com.sbb.core` | Implementa o Hash SHA-256 e a Prova de Trabalho (`mineBlock`). A unidade fundamental da cadeia. |
+| `Transaction.java` | `com.sbb.core` | Classe de dados imutável que armazena os detalhes da transação (valor, remetente, destinatário). |
+| `Blockchain.java` | `com.sbb.core` | Gerencia a lista de blocos, a criação do Bloco Gênese e o mecanismo de segurança (`isChainValid`). |
+| `Main.java` | `com.sbb.app` | Ponto de entrada da aplicação e ambiente de teste para demonstração dos cenários de Sucesso e Falha. |
+
+## 🔗 Demonstração da Imutabilidade
+
+A validação do projeto prova o **RF07 (Simulação de Adulteração)**:
+
+1.  **Cenário de Sucesso:** `A Cadeia é Válida? true`
+2.  **Cenário de Falha:** Alterar o hash de um bloco resulta em `Cadeia Inválida...` e `A Cadeia é Válida? false`.
+
+## ⚙️ Como Executar o Projeto
+
+### Pré-requisitos
+* Java Development Kit (JDK) 11 ou superior.
+* Uma IDE (IntelliJ IDEA ou VS Code com extensões Java).
+
+### Passos
+1.  **Clone o repositório:**
+    `git clone https://www.youtube.com/watch?v=RqfwLeY952s`
+2.  **Abra na IDE:** Importe o projeto.
+3.  **Execute o `Main.java`:** A simulação será iniciada, minerando os blocos e rodando os testes de validação automaticamente.
