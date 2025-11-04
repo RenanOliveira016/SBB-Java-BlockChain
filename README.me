@@ -1,27 +1,33 @@
 # 🪙 SBB: Simulador Básico de Blockchain (Java)
 
-## Visão Geral do Projeto
-Este projeto é um simulador didático de uma Blockchain simples (Single-Node), desenvolvido em Java. Ele foi criado com foco na implementação dos princípios criptográficos de imutabilidade, Prova de Trabalho (Proof of Work - PoW) e encadeamento de blocos.
+## 📌 Status do Projeto
+**Projeto Concluído**
 
-A arquitetura do projeto utiliza classes imutáveis para os dados (Transaction) e demonstra a falha imediata da cadeia ao tentar simular uma fraude.
+## Visão Geral e Propósito
+Este projeto é um simulador didático de uma Blockchain simples (Single-Node), desenvolvido em Java. Ele foi criado com foco em demonstrar e validar os princípios criptográficos fundamentais da tecnologia Blockchain:
+1. **Imutabilidade** (Garantida pelo Hash SHA-256).
+2. **Prova de Trabalho (PoW)**, através da mineração com o atributo `nonce`.
+3. **Encadeamento Criptográfico** (`previousHash`).
+
+A arquitetura utiliza o design de **dados estruturados** (`Transaction` imutável), preparando a base para futuras integrações (como Machine Learning ou APIs).
 
 ## 🛠 Arquitetura e Estrutura de Classes
 
-O projeto é dividido em pacotes (`com.sbb.core` e `com.sbb.app`) para separar a lógica principal da aplicação:
+O projeto é organizado nos pacotes `com.sbb.core` (lógica central) e `com.sbb.app` (execução).
 
-| Classe | Pacote | Função |
-| :--- | :--- | :--- |
-| `Block.java` | `com.sbb.core` | Implementa o Hash SHA-256 e a Prova de Trabalho (`mineBlock`). A unidade fundamental da cadeia. |
-| `Transaction.java` | `com.sbb.core` | Classe de dados imutável que armazena os detalhes da transação (valor, remetente, destinatário). |
-| `Blockchain.java` | `com.sbb.core` | Gerencia a lista de blocos, a criação do Bloco Gênese e o mecanismo de segurança (`isChainValid`). |
-| `Main.java` | `com.sbb.app` | Ponto de entrada da aplicação e ambiente de teste para demonstração dos cenários de Sucesso e Falha. |
+| Classe | Pacote | Função Principal |
+| :------ | :------ | :------ |
+| **`Block.java`** | `core` | A unidade fundamental. Implementa o Hash SHA-256 e o método `mineBlock()`. |
+| **`Transaction.java`** | `core` | A entidade de dados imutável. Define os campos estruturados (amount, sender, recipient). |
+| **`Blockchain.java`** | `core` | Gerencia a lista de blocos, o Bloco Gênese e o mecanismo de segurança principal (`isChainValid`). |
+| **`Main.java`** | `app` | Ponto de entrada e orquestrador. Roda os cenários de teste de Sucesso e Falha (RF07). |
 
-## 🔗 Demonstração da Imutabilidade
+## 🔒 Prova de Integridade (Cenários de Teste)
 
-A validação do projeto prova o **RF07 (Simulação de Adulteração)**:
+O projeto cumpre o **Requisito Funcional RF07** ao demonstrar que a cadeia é quebrada por qualquer adulteração:
 
-1.  **Cenário de Sucesso:** `A Cadeia é Válida? true`
-2.  **Cenário de Falha:** Alterar o hash de um bloco resulta em `Cadeia Inválida...` e `A Cadeia é Válida? false`.
+* **Teste 1 (Sucesso):** Quando a cadeia está intacta, a validação retorna: `A Cadeia é Válida? true`
+* **Teste 2 (Fraude):** Após adulterar o hash de um bloco, a validação retorna: `Cadeia Inválida: O Hash do Bloco #2 foi alterado.` e `A Cadeia é Válida? false`
 
 ## ⚙️ Como Executar o Projeto
 
@@ -33,4 +39,4 @@ A validação do projeto prova o **RF07 (Simulação de Adulteração)**:
 1.  **Clone o repositório:**
     `git clone https://www.youtube.com/watch?v=RqfwLeY952s`
 2.  **Abra na IDE:** Importe o projeto.
-3.  **Execute o `Main.java`:** A simulação será iniciada, minerando os blocos e rodando os testes de validação automaticamente.
+3.  **Execute o `Main.java`:** A simulação será iniciada, minerando os blocos (o que pode levar alguns segundos, dependendo da dificuldade) e rodando os testes de validação automaticamente.
